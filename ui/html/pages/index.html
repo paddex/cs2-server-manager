@@ -1,0 +1,152 @@
+{{ define "title" }}CS2 ServerManager{{ end }}
+
+{{ define "main" }}
+  <div class="flex w-full flex-col items-center gap-8 px-4 py-8">
+    <div
+      class="relative flex h-[150px] w-full flex-col gap-2 rounded-md border border-gray-700 p-4"
+    >
+      <p class="absolute -top-3 bg-gray-700 p-1 text-xs">ServerList</p>
+      <button
+        id="serverListBtn"
+        class="absolute -top-3 right-4 w-fit cursor-pointer bg-orange-400 px-2 py-1 text-xs font-bold text-black hover:font-extrabold"
+        onclick="openServerDialog()"
+      >
+        Manage Servers
+      </button>
+      <table class="w-full border-collapse border border-gray-700 text-xs">
+        <thead>
+          <tr class="bg-gray-900">
+            <th class="border border-gray-700">ServerName</th>
+            <th class="border border-gray-700">IP-Address</th>
+            <th class="border border-gray-700">Port</th>
+            <th class="border border-gray-700">Map</th>
+            <th class="border border-gray-700">Players</th>
+            <th class="border border-gray-700">Ping</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!--Manage-Server-Dialog-->
+  <dialog
+    id="serverDialog"
+    class="m-auto h-[70vh] w-[30vw] backdrop:bg-black/80"
+  ></dialog>
+
+  <template id="manageServerDialogTemplate">
+    <div
+      class="relative flex h-full w-full flex-col items-center gap-4 bg-gray-950 p-4 text-sm text-white"
+    >
+      <button
+        class="absolute top-4 right-4 cursor-pointer"
+        onclick="closeServerManagerModal()"
+      >
+        ✖️
+      </button>
+      <h3 class="text-lg font-bold">Manage Servers</h3>
+      <div
+        class="flex h-2/3 w-4/5 flex-col items-center overflow-scroll border border-gray-700"
+      >
+        <table id="serverManagerTable" class="w-full border-collapse">
+          <thead class="bg-gray-900">
+            <tr class="">
+              <th class="border border-gray-700 px-1">Name</th>
+              <th class="border border-gray-700 px-1">Serveraddress</th>
+              <th class="border border-gray-700 px-1">Port</th>
+              <th class="border border-gray-700 px-1">RCON-Password</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="flex w-4/5 justify-between">
+        <button class="cursor-pointer rounded-sm bg-red-800 px-2 py-1">
+          Delete
+        </button>
+        <button class="cursor-pointer rounded-sm bg-blue-800 px-2 py-1">
+          Edit
+        </button>
+        <button class="cursor-pointer rounded-sm bg-green-800 px-2 py-1">
+          Add
+        </button>
+      </div>
+      <button
+        class="cursor-pointer self-end rounded-sm bg-gray-700 px-2 py-1"
+        onclick="closeServerManagerModal()"
+      >
+        Close
+      </button>
+    </div>
+  </template>
+
+  <template id="addServerDialogTemplate">
+    <div
+      class="relative flex h-full w-full flex-col items-center gap-4 bg-gray-950 p-4 text-sm text-white"
+    >
+      <button
+        class="absolute top-4 left-4 cursor-pointer"
+        onclick="goBackToServerManager()"
+      >
+        ⬅️
+      </button>
+      <h3 class="text-lg font-bold">Add a Server</h3>
+      <div class="flex w-4/5 flex-col gap-4 border border-gray-700 p-4">
+        <div class="flex flex-col">
+          <label for="serverNameInput">Server Name</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverNameInput"
+            name="serverNameInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverAddrInput">Server Address</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverAddrInput"
+            name="serverAddrInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverPortInput">Server Port</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverPortInput"
+            name="serverPortInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverPasswordInput">Server RCON Password</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverPasswordInput"
+            name="serverPasswordInput"
+          />
+        </div>
+      </div>
+      <div class="flex w-4/5 flex-col">
+        <button
+          class="cursor-pointer self-end rounded-sm bg-green-800 px-2 py-1"
+          onclick="addServer()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <template id="serverRowTemplate">
+    <tr class="serverRow">
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+    </tr>
+  </template>
+{{ end }}

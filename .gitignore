@@ -1,0 +1,4 @@
+error.log
+access.log
+tmp/
+node_modules

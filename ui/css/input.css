@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/*@config '../../tailwind.config.js';*/
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@theme {
+  --color-quade: #3871c2;
+
+  --animate-slidein: slidein 0.5s ease-in-out;
+  --animate-slideout: slideout 0.5s ease-in-out;
+  --animate-fade: fade 2s ease-in-out;
+
+  @keyframes slidein {
+    0% {
+      flex-basis: 50px;
+      max-width: 50px;
+    }
+    100% {
+      flex-basis: 300px;
+      max-width: 300px;
+    }
+  }
+
+  @keyframes slideout {
+    0% {
+      flex-basis: 300px;
+      max-width: 300px;
+    }
+    100% {
+      flex-basis: 50px;
+      max-width: 50px;
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 100%;
+    }
+    100% {
+      opacity: 0%;
+    }
+  }
+}
+
+.activeServerRow {
+  background-color: var(--color-blue-800);
+}

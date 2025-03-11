@@ -1,0 +1,29 @@
+{{ define "base" }}
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{{ template "title" }}</title>
+      <link
+        href="{{ .Config.WebServer.BasePath }}/static/app.css"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+      />
+      <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    </head>
+    <body class="bg-gray-950 text-white" onload="onPageLoad()">
+      <div class="flex h-[75px] w-full items-center bg-[#e18312] px-2">
+        <div class="flex flex-col items-center gap-0 text-black">
+          <h1 class="m-0 text-xl font-bold">Counter Strike 2</h1>
+          <h2 class="text-md font-bold">Server Manager</h2>
+        </div>
+      </div>
+      {{ template "main" . }}
+      <script src="{{ .Config.WebServer.BasePath }}/static/js.js"></script>
+    </body>
+  </html>
+{{ end }}

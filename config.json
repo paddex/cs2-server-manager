@@ -1,0 +1,13 @@
+{
+  "logging": {
+    "error_log": "error.log",
+    "access_log": "access.log",
+    "log_level": "DEBUG",
+    "enable_access_log": true
+  },
+  "webserver": {
+    "host": "",
+    "port": 8080,
+    "basepath": "/"
+  }
+}
