@@ -1,4 +1,4 @@
-/*! tailwindcss v4.0.13 | MIT License | https://tailwindcss.com */
+/*! tailwindcss v4.0.14 | MIT License | https://tailwindcss.com */
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
@@ -200,14 +200,8 @@
   .-top-3 {
     top: calc(var(--spacing) * -3);
   }
-  .top-2 {
-    top: calc(var(--spacing) * 2);
-  }
   .top-4 {
     top: calc(var(--spacing) * 4);
-  }
-  .right-2 {
-    right: calc(var(--spacing) * 2);
   }
   .right-4 {
     right: calc(var(--spacing) * 4);
@@ -226,6 +220,9 @@
   }
   .flex {
     display: flex;
+  }
+  .hidden {
+    display: none;
   }
   .table {
     display: table;
@@ -290,9 +287,6 @@
   .justify-between {
     justify-content: space-between;
   }
-  .justify-center {
-    justify-content: center;
-  }
   .gap-0 {
     gap: calc(var(--spacing) * 0);
   }
@@ -304,9 +298,6 @@
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
-  }
-  .place-self-end {
-    place-self: end;
   }
   .self-end {
     align-self: flex-end;
@@ -410,10 +401,6 @@
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
-  .outline-none {
-    --tw-outline-style: none;
-    outline-style: none;
-  }
   .backdrop\:bg-black\/80 {
     &::backdrop {
       background-color: color-mix(in oklab, var(--color-black) 80%, transparent);
@@ -427,16 +414,6 @@
       }
     }
   }
-  .focus\:outline-blue-700 {
-    &:focus {
-      outline-color: var(--color-blue-700);
-    }
-  }
-  .focus\:outline-blue-800 {
-    &:focus {
-      outline-color: var(--color-blue-800);
-    }
-  }
   .focus-visible\:outline {
     &:focus-visible {
       outline-style: var(--tw-outline-style);
@@ -448,23 +425,8 @@
       outline-color: var(--color-blue-700);
     }
   }
-  .focus-visible\:outline-blue-800 {
-    &:focus-visible {
-      outline-color: var(--color-blue-800);
-    }
-  }
-  .active\:outline-blue-700 {
-    &:active {
-      outline-color: var(--color-blue-700);
-    }
-  }
-  .active\:outline-blue-800 {
-    &:active {
-      outline-color: var(--color-blue-800);
-    }
-  }
 }
-.activeServerRow {
+.serverManagerActiveRow {
   background-color: var(--color-blue-800);
 }
 @property --tw-rotate-x {

@@ -62,13 +62,22 @@
         </table>
       </div>
       <div class="flex w-4/5 justify-between">
-        <button class="cursor-pointer rounded-sm bg-red-800 px-2 py-1">
+        <button
+          class="cursor-pointer rounded-sm bg-red-800 px-2 py-1"
+          onclick="deleteServerFromServerList()"
+        >
           Delete
         </button>
-        <button class="cursor-pointer rounded-sm bg-blue-800 px-2 py-1">
+        <button
+          class="cursor-pointer rounded-sm bg-blue-800 px-2 py-1"
+          onclick="editServerDialog()"
+        >
           Edit
         </button>
-        <button class="cursor-pointer rounded-sm bg-green-800 px-2 py-1">
+        <button
+          class="cursor-pointer rounded-sm bg-green-800 px-2 py-1"
+          onclick="openAddServerDialog()"
+        >
           Add
         </button>
       </div>
@@ -93,6 +102,7 @@
       </button>
       <h3 class="text-lg font-bold">Add a Server</h3>
       <div class="flex w-4/5 flex-col gap-4 border border-gray-700 p-4">
+        <input type="hidden" id="idInput" name="idInput" value="-1" />
         <div class="flex flex-col">
           <label for="serverNameInput">Server Name</label>
           <input
@@ -142,7 +152,10 @@
   </template>
 
   <template id="serverRowTemplate">
-    <tr class="serverRow">
+    <tr
+      class="serverRow cursor-pointer"
+      onclick="setServerManagerRowActive(this)"
+    >
       <td class="border border-gray-700"></td>
       <td class="border border-gray-700"></td>
       <td class="border border-gray-700"></td>
