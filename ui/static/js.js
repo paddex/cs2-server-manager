@@ -1,6 +1,52 @@
 // Manage Servers
 
-function onPageLoad() {}
+function onPageLoad() {
+  updateMainServerList();
+}
+
+async function updateMainServerList() {
+  const servers = loadServerList();
+  const response = await fetch("/serverinfo", {
+    method: "POST",
+    body: JSON.stringify(servers),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (response.status != 200) {
+    console.log("Something went wrong!");
+    return;
+  }
+  const list = await response.json();
+
+  const table = document
+    .querySelector("#mainTableTemplate")
+    .content.cloneNode(true);
+  let tbody = table.querySelector("tbody");
+  for (l of list) {
+    const row = document
+      .querySelector("#mainServerRowInfoTemplate")
+      .content.cloneNode(true);
+    let tds = row.querySelectorAll("td");
+    tds[0].textContent = l.Name;
+    tds[1].textContent = l.Addr;
+    tds[2].textContent = l.Port;
+    tds[3].textContent = l.Map;
+    tds[4].textContent = l.Players;
+
+    tbody.appendChild(row);
+  }
+  const tablediv = document.querySelector("#mainTableDiv");
+  const spinner = tablediv.querySelector("svg");
+  if (spinner != undefined) {
+    tablediv.removeChild(spinner);
+  }
+  const oldTable = tablediv.querySelector("#mainTable");
+  if (oldTable != undefined) {
+    tablediv.removeChild(oldTable);
+  }
+  tablediv.appendChild(table);
+}
 
 function openServerDialog() {
   const dialog = document.getElementById("serverDialog");
@@ -37,7 +83,7 @@ function addServer() {
   let server = {};
   server.Name = document.getElementById("serverNameInput").value;
   server.Addr = document.getElementById("serverAddrInput").value;
-  server.Port = document.getElementById("serverPortInput").value;
+  server.Port = parseInt(document.getElementById("serverPortInput").value, 10);
   server.Password = document.getElementById("serverPasswordInput").value;
 
   saveServer(server, id);
