@@ -1,0 +1,29 @@
+{{ define "mainTableTemplate" }}
+  <template id="mainTableTemplate">
+    <table
+      id="mainTable"
+      class="w-full border-collapse overflow-y-scroll border border-gray-700 text-xs"
+    >
+      <thead>
+        <tr class="bg-gray-900">
+          <th class="border border-gray-700">ServerName</th>
+          <th class="border border-gray-700">IP-Address</th>
+          <th class="border border-gray-700">Port</th>
+          <th class="border border-gray-700">Map</th>
+          <th class="border border-gray-700">Players</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </template>
+
+  <template id="mainServerRowInfoTemplate">
+    <tr class="mainServerRow cursor-pointer" onclick="clickMainServerRow(this)">
+      <td class="border border-gray-700 p-1"></td>
+      <td class="border border-gray-700 p-1"></td>
+      <td class="border border-gray-700 p-1"></td>
+      <td class="border border-gray-700 p-1"></td>
+      <td class="border border-gray-700 p-1"></td>
+    </tr>
+  </template>
+{{ end }}

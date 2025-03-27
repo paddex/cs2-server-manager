@@ -1,6 +1,9 @@
 // Manage Servers
 
 function onPageLoad() {
+  const tmpl = document.querySelector("#rconEmptyTemplate");
+  const rcondiv = document.querySelector("#rcondiv");
+  rcondiv.appendChild(tmpl.content.cloneNode(true));
   updateMainServerList();
 }
 
@@ -23,7 +26,8 @@ async function updateMainServerList() {
     .querySelector("#mainTableTemplate")
     .content.cloneNode(true);
   let tbody = table.querySelector("tbody");
-  for (l of list) {
+  for (let i = 0; i < list.length; i++) {
+    const l = list[i];
     const row = document
       .querySelector("#mainServerRowInfoTemplate")
       .content.cloneNode(true);
@@ -33,6 +37,9 @@ async function updateMainServerList() {
     tds[2].textContent = l.Port;
     tds[3].textContent = l.Map;
     tds[4].textContent = l.Players;
+
+    let tr = row.querySelector("tr");
+    tr.dataset.id = i;
 
     tbody.appendChild(row);
   }
@@ -177,4 +184,76 @@ function editServerDialog() {
   server.Password = row.dataset.password;
 
   openAddServerDialog(server);
+}
+
+function clickMainServerRow(tr) {
+  const id = tr.dataset.id;
+  let currentId = -1;
+  const activeRow = document.querySelector(".mainTableActiveRow");
+  if (activeRow != null) {
+    activeRow.classList.remove("mainTableActiveRow");
+    currentId = activeRow.dataset.id;
+  }
+
+  const rcondiv = document.querySelector("#rcondiv");
+
+  if (id != currentId) {
+    const allRows = document.querySelectorAll(".mainServerRow");
+    allRows[id].classList.add("mainTableActiveRow");
+    const tmpl = document.querySelector("#rconPanelTemplate");
+    rcondiv.replaceChildren(tmpl.content.cloneNode(true));
+  } else {
+    const tmpl = document.querySelector("#rconEmptyTemplate");
+    rcondiv.replaceChildren(tmpl.content.cloneNode(true));
+  }
+}
+
+async function sendCmdToServer(cmd) {
+  const selectedServer = document.querySelector(".mainTableActiveRow").dataset
+    .id;
+  const server = loadServerList()[selectedServer];
+
+  let data = {
+    Addr: server.Addr,
+    Port: server.Port,
+    Password: server.Password,
+    Cmd: cmd,
+  };
+
+  const response = await fetch("/rcon", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const res = await response.json();
+
+  return res;
+}
+
+function consoleCheckReturn(e) {
+  if (e.key == "Enter" && e.shiftKey == false && e.ctrlKey == false) {
+    sendConsoleCmd();
+  }
+}
+
+async function sendConsoleCmd() {
+  const inp = document.querySelector("#consoleInput");
+  const con = document.querySelector("#consoleWindow");
+  const cmdTmpl = document.querySelector("#rconCmdLineTemplate");
+  const replyTmpl = document.querySelector("#rconReplyLineTemplate");
+  const emptyTmpl = document.querySelector("#rconEmptyLineTemplate");
+  const cmd = inp.value;
+  const cmdLine = cmdTmpl.content.cloneNode(true);
+  cmdLine.querySelector("p").textContent = cmd;
+  con.appendChild(cmdLine);
+  const res = await sendCmdToServer(cmd);
+  inp.value = "";
+  const replyLine = replyTmpl.content.cloneNode(true);
+  replyLine.querySelector("p").textContent = res.Result;
+  con.appendChild(replyLine);
+  con.appendChild(emptyTmpl.content.cloneNode(true));
+  con.scrollTop = con.scrollHeight;
 }

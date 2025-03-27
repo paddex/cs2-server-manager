@@ -14,6 +14,7 @@ func (h *Handler) Routes() http.Handler {
 	router.Handle("GET /static/", http.StripPrefix("/static", fileServer))
 
 	router.HandleFunc("GET /{$}", h.indexHandler)
+	router.HandleFunc("POST /rcon", h.rconHandler)
 	router.HandleFunc("POST /serverinfo", h.serverInfoHandler)
 
 	return h.logRequest(router)

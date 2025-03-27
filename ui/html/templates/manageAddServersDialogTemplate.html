@@ -1,0 +1,74 @@
+{{ define "manageAddServersDialogTemplate" }}
+  <template id="addServerDialogTemplate">
+    <div
+      class="relative flex h-full w-full flex-col items-center gap-4 bg-gray-950 p-4 text-sm text-white"
+    >
+      <button
+        class="absolute top-4 left-4 cursor-pointer"
+        onclick="goBackToServerManager()"
+      >
+        ⬅️
+      </button>
+      <h3 class="text-lg font-bold">Add a Server</h3>
+      <div class="flex w-4/5 flex-col gap-4 border border-gray-700 p-4">
+        <input type="hidden" id="idInput" name="idInput" value="-1" />
+        <div class="flex flex-col">
+          <label for="serverNameInput">Server Name</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverNameInput"
+            name="serverNameInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverAddrInput">Server Address</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverAddrInput"
+            name="serverAddrInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverPortInput">Server Port</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverPortInput"
+            name="serverPortInput"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="serverPasswordInput">Server RCON Password</label>
+          <input
+            type="text"
+            class="rounded-sm border border-gray-700 bg-gray-900 px-2 focus-visible:outline focus-visible:outline-blue-700"
+            id="serverPasswordInput"
+            name="serverPasswordInput"
+          />
+        </div>
+      </div>
+      <div class="flex w-4/5 flex-col">
+        <button
+          class="cursor-pointer self-end rounded-sm bg-green-800 px-2 py-1"
+          onclick="addServer()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <template id="serverRowTemplate">
+    <tr
+      class="serverRow cursor-pointer"
+      onclick="setServerManagerRowActive(this)"
+    >
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+      <td class="border border-gray-700"></td>
+    </tr>
+  </template>
+{{ end }}

@@ -49,6 +49,7 @@
   }
 }
 
-.serverManagerActiveRow {
+.serverManagerActiveRow,
+.mainTableActiveRow {
   background-color: var(--color-blue-800);
 }

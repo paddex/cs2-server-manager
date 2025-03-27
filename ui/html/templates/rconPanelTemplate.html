@@ -1,0 +1,68 @@
+{{ define "rconPanelTemplate" }}
+  <template id="rconPanelTemplate">
+		<div class="grid grid-cols-3 justify-center w-1/2">
+			<div class="flex border border-gray-700 relative gap-2 w-fit h-fit p-4 rounded-md">
+				<p class="absolute bg-gray-600 text-white text-xs p-1 -top-4">	
+					Teams
+				</p>
+				<button class="bg-orange-400 px-2 py-1 font-bold h-fit w-fit text-black cursor-pointer text-xs">Scramble</button>
+				<button class="bg-orange-400 px-2 py-1 font-bold h-fit w-fit text-black cursor-pointer text-xs">Switch</button>
+			</div>
+			<div class="flex border border-gray-700 relative gap-2 w-fit h-fit p-4 rounded-md">
+				<p class="absolute bg-gray-600 text-white text-xs p-1 -top-4">	
+					Map
+				</p>
+				<select class="h-fit w-fit text-xs">
+					<option value="">Chose a map</option>
+					<option value="de_ancient">Ancient</option>
+					<option value="de_anubis">Anubis</option>
+					<option value="de_dust2">Dust2</option>
+					<option value="de_inferno">Inferno</option>
+					<option value="de_mirage">Mirage</option>
+					<option value="de_nuke">Nuke</option>
+					<option value="de_overpass">Overpass</option>
+					<option value="de_train">Train</option>
+					<option value="de_vertigo">Vertigo</option>
+				</select>
+				<button class="bg-orange-400 px-2 py-1 font-bold h-fit w-fit text-black cursor-pointer text-xs">Switch</button>
+			</div>
+			<p>placeholder</p>
+		</div>
+		<div class="flex flex-col items-center justify-center w-1/2 px-4">
+			<div id="consoleWindow" class="border-4 border-gray-800 w-full h-96 cursor-text resize-none text-xs overflow-scroll">
+			</div>
+			<div class="flex w-full">
+				<input 
+					id="consoleInput"
+					name="consoleInput"
+					class="w-full border-4 border-gray-800 outline-none px-2 text-xs"
+					onkeydown="consoleCheckReturn(event)"
+				></input>
+				<button
+					class="bg-orange-400 text-black text-xs px-4 py-1 border-4 border-gray-800 cursor-pointer font-extrabold"
+					onclick="sendConsoleCmd()"
+				>
+					Send
+				</button>
+			</div>
+		</div>
+	</template>
+
+	<template id="rconCmdLineTemplate">
+		<p class="text-xs text-gray-500"></p>
+	</template>
+
+	<template id="rconReplyLineTemplate">
+		<p class="text-xs text-white whitespace-pre"></p>
+	</template>
+
+	<template id="rconEmptyLineTemplate">
+		<p class="text-xs">&nbsp;</p>
+	</template>
+{{ end }}
+
+{{ define "rconEmptyTemplate" }}
+  <template id="rconEmptyTemplate">
+    <h2 class="text-xl font-bold">Select a server to send commands</h2>
+  </template>
+{{ end }}
